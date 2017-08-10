@@ -155,8 +155,9 @@
         <dependency>  
             <groupId>org.codehaus.jackson</groupId>  
             <artifactId>jackson-mapper-asl</artifactId>  
-            <version>1.9.13</version>  
+            <version>1.9.4</version>  
         </dependency>  
+     
         <!-- 上传组件包 -->  
         <dependency>  
             <groupId>commons-fileupload</groupId>  
@@ -173,7 +174,12 @@
             <artifactId>commons-codec</artifactId>  
             <version>1.9</version>  
         </dependency>  
-
+         <!-- 没有用到的包可以去掉-->  
+		<dependency>
+			<groupId>tk.mybatis</groupId>
+			<artifactId>mapper</artifactId>
+			<version>3.3.7</version>
+		</dependency>
 	</dependencies>
 	
 	<build>

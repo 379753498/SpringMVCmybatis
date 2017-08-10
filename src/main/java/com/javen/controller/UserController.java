@@ -1,6 +1,7 @@
 package com.javen.controller;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -35,19 +36,7 @@ public class UserController {
     // /user/test?id=1
     @RequestMapping(value="/test",method=RequestMethod.GET)  
     public String test(HttpServletRequest request,Model model){  
-        int userId = Integer.parseInt(request.getParameter("id"));  
-        System.out.println("userId:"+userId);
-        User user=null;
-        if (userId==1) {
-        	 user = new User();  
-        	 user.setAge(11);
-        	 user.setId(1);
-        	 user.setPassword("123");
-        	 user.setUserName("javen");
-		}
-       
-        log.debug(user.toString());
-        model.addAttribute("user", user);  
+      
         return "index";  
     }  
     
@@ -55,11 +44,10 @@ public class UserController {
     // /user/showUser?id=1
     @RequestMapping(value="/showUser",method=RequestMethod.GET)  
     public String toIndex(HttpServletRequest request,Model model){  
-        int userId = Integer.parseInt(request.getParameter("id"));  
-        System.out.println("userId:"+userId);
-        User user = this.userService.getUserById(userId);  
-        log.debug(user.toString());
-        model.addAttribute("user", user);  
+       
+    	List<User> selectByState = userService.selectByState(0);  
+        log.debug(selectByState.get(0).toString());
+        model.addAttribute("user", selectByState.get(0));  
         return "showUser";  
     }  
     

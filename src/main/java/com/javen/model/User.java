@@ -1,51 +1,77 @@
 package com.javen.model;
 
-public class User {
-    private Integer id;
+import java.io.Serializable;
 
-    private String userName;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-    private String password;
+import org.springframework.stereotype.Component;
 
-    private Integer age;
+/**
+ * 
+ *
+ * CREATE TABLE `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `username` varchar(60) DEFAULT NULL COMMENT '用户名',
+  `password` varchar(60) DEFAULT NULL COMMENT '密码',
+  `state` int(11) DEFAULT NULL COMMENT '状态',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName == null ? null : userName.trim();
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
+ *@Title:  
+ *@Description:  
+ *@Author:Administrator  
+ *@Since:2017年7月21日  
+ *@Version:1.1.0
+ */
+@Component
+public class User implements Serializable {
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", userName=" + userName + ", password="
-				+ password + ", age=" + age + "]";
+		return "User [id=" + id + ", username=" + username + ", state=" + state
+				+ ", password=" + password + "]";
 	}
-    
-    
+
+	@Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+	private String username;
+	private Integer state;
+	private String password;
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public Integer getState() {
+		return state;
+	}
+
+	public void setState(Integer state) {
+		this.state = state;
+	}
+
 }

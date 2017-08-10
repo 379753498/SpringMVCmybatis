@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Select;
 import com.javen.model.User;
 
 
-public interface IUserDao {
+public interface IUserDaoto  {
     int deleteByPrimaryKey(Integer id);
 
     int insert(User record);
