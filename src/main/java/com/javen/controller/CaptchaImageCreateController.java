@@ -32,8 +32,8 @@ import com.google.code.kaptcha.impl.DefaultKaptcha;
 public class CaptchaImageCreateController {
 	  private Producer captchaProducer = null;
 
-//	    @Autowired
-//	    @Qualifier("captchaProducer")
+	    @Autowired
+	    @Qualifier("captchaProducer")
 	    public void setCaptchaProducer(Producer captchaProducer){
 	        this.captchaProducer = captchaProducer;
 	    }
