@@ -20,13 +20,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.javen.model.User;
 import com.javen.service.IUserService;
   
   
 @Controller  
-@RequestMapping("/user")  
 // /user/**
 public class UserController {  
 	private static Logger log=LoggerFactory.getLogger(UserController.class);
@@ -41,12 +41,72 @@ public class UserController {
     }  
     
     
+    
+    
+    
+	@RequestMapping(value ="/login" , method = RequestMethod.GET) 
+	public ModelAndView  login( User user){
+		
+		
+		String username = user.getUsername();
+		String password = user.getPassword();
+		System.out.println(username);
+		System.out.println(password);
+		ModelAndView ms= new ModelAndView();
+		ms.setViewName("view/iframe/main");
+
+		return ms;
+		}
+	
+	
+	
+	
+
+	@RequestMapping("/loginone")
+
+	public String loginone() {
+		return "view/iframe/main";
+	}
+	
+	
+	@RequestMapping("/top")
+
+	public String top() {
+		return "view/iframe/top";
+	}
+	@RequestMapping("/center")
+
+	public String center() {
+		return "view/iframe/center";
+	}
+	
+	@RequestMapping("/main")
+
+	public String main() {
+		return "view/iframe/main";
+	}
+	
+	
+	@RequestMapping("/left")
+
+	public String left() {
+		return "view/iframe/left";
+	}
+	@RequestMapping("/right")
+	public String right() {
+		return "view/iframe/right";
+	}
+	
+	
+    
+    
     // /user/showUser?id=1
     @RequestMapping(value="/showUser",method=RequestMethod.GET)  
     public String toIndex(HttpServletRequest request,Model model){  
-       
+      
     	List<User> selectByState = userService.selectByState(0);  
         log.debug(selectByState.get(0).toString());
+        System.out.println(selectByState.size());
         model.addAttribute("user", selectByState.get(0));  
         return "showUser";  
     }  
