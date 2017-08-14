@@ -49,14 +49,16 @@ public class LoginContoller {
      */
     @RequestMapping(value = "check.do", method = RequestMethod.POST)
     @ResponseBody
-    public String loginCheck(HttpServletRequest request,
-//            @RequestParam(value = "username", required = true) String username,
+    public String loginCheck(HttpServletRequest request,//            @RequestParam(value = "username", required = true) String username,
 //            @RequestParam(value = "password", required = true) String password,
             @RequestParam(value = "kaptcha", required = true) String kaptchaReceived){
         //用户输入的验证码的值
         String kaptchaExpected = (String) request.getSession().getAttribute(
                 com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
         //校验验证码是否正确
+       
+        System.out.println(kaptchaExpected);
+        System.out.println(kaptchaReceived);
         if (kaptchaReceived == null || !kaptchaReceived.equals(kaptchaExpected)) {
             return "kaptcha_error";//返回验证码错误
         }

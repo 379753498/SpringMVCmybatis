@@ -48,19 +48,7 @@
 		<load-on-startup>1</load-on-startup>
 		<async-supported>true</async-supported>
 	</servlet>
-		<servlet>
-	<servlet-name>Kaptcha</servlet-name>
-	<servlet-class>com.google.code.kaptcha.servlet.KaptchaServlet</servlet-class>
-		
-	<init-param>
-	 <param-name>kaptcha.border	</param-name>
-	 <param-value>yes</param-value> 
-	 </init-param>
-	</servlet>
-		<servlet-mapping>
-		<servlet-name>Kaptcha</servlet-name>
-		<url-pattern>/kaptcha.jpg</url-pattern>
-	</servlet-mapping>
+	
 
 	<servlet-mapping>
 		<servlet-name>SpringMVC</servlet-name>
