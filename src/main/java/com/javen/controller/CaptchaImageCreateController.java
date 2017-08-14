@@ -3,18 +3,22 @@ package com.javen.controller;
 import java.awt.image.BufferedImage;
 
 
+
+
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
+import com.google.code.kaptcha.impl.DefaultKaptcha;
 
 /**
  * ClassName: CaptchaImageCreateController
@@ -26,14 +30,17 @@ import com.google.code.kaptcha.Producer;
 @Controller
 @RequestMapping("/myweb")
 public class CaptchaImageCreateController {
-	
-	@Autowired
-    private Producer captchaProducer ;
+	  private Producer captchaProducer = null;
 
-
-
-    @RequestMapping("/kaptcha.jpg")
+//	    @Autowired
+//	    @Qualifier("captchaProducer")
+	    public void setCaptchaProducer(Producer captchaProducer){
+	        this.captchaProducer = captchaProducer;
+	    }
+    @RequestMapping("/kaptcha.jpg.do")
     public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception{
+    	
+    	System.out.println("aaaa");
         // Set to expire far in the past.
         response.setDateHeader("Expires", 0);
         // Set standard HTTP/1.1 no-cache headers.

@@ -6,7 +6,7 @@
 <link href="css/style.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" src="js/jquery.js"></script>
 <script src="js/cloud.js" type="text/javascript"></script>
-<script type="text/javascript" src="js/jquery.1.11.3.min.js"></script>	
+<script type="text/javascript" src="js/jquery.1.11.3.min.js"></script>
 
 <script language="javascript">
 	$(function(){
@@ -18,17 +18,22 @@
 	
 	
 	
-</script> 
+</script>
 <script language="javascript">
+$(document).ready(function(){
 $('#kaptchaImage').click(function() {
+	
     $(this).attr('src','kaptcha.jpg?' + Math.floor(Math.random() * 100));
+    
 });
 
 $('#kaptcha').bind({ 
+
     focus:function(){ 
 //        if (this.value == this.defaultValue){ 
 //            this.value=""; 
 //        } 
+    	
     }, 
     blur:function(){
         var paramsTime  ={
@@ -36,17 +41,19 @@ $('#kaptcha').bind({
         };
         $.ajax({
              type: "POST",
-             url: getContextPath()+"/check",
+             url: getContextPath()+"/myweb/kaptcha.jpg.do",
              data: paramsTime,
              dataType: "json",
              success: function(data){
+            	 alert(data);
                     $('#kaptcha').html(data);
              }
          });
     } 
 });
+});
 
-</script> 
+</script>
 <script language="javascript">
 
 function login() 
@@ -54,20 +61,18 @@ function login()
 		
 		var username = $("#username").val();
 		var password = $("#password").val();
-		
+		var kaptcha =$("#kaptcha").val();
 	
 
 	$.ajax(	{
-		url:getContextPath()+"/login/login.do",
-		data:{"username":username,"password":password},
+		url:getContextPath()+"/login/check.do",
+		data:{"username":username,"kaptcha":kaptcha,"username":username},
 		type:"post",
 		async:true,
 		
 		success: function(data){
-			debugger;
-			localStorage.setItem("hello", data);
 		
-			window.location.href=getContextPath()+data;
+			alert(data);
 			
 			},
 		error: function(xhr){
@@ -82,36 +87,9 @@ function login()
 	
 }
 
-function login1() 
-{
-		
-		var username = $("#username").val();
-		var password = $("#password").val();
-		
-	
-
-	$.ajax(	{
-		url:getContextPath()+"/login/login.do",
-		data:{"username":username,"password":password},
-		type:"post",
-		async:true,
-		
-		success: function(data){
-			debugger;
-			window.location.href=getContextPath()+"/page/main.html";
-			
-			},
-		error: function(xhr){
-			console.log(xhr);
-			alert(8866)
-		}
-		});
-
 
 	
 	
-	
-}
 
 
 
@@ -127,50 +105,58 @@ function getContextPath(){
 
 </head>
 
-<body style="background-color:#1c77ac; background-image:url(images/light.png); background-repeat:no-repeat; background-position:center top; overflow:hidden;">
+<body
+	style="background-color: #1c77ac; background-image: url(images/light.png); background-repeat: no-repeat; background-position: center top; overflow: hidden;">
 
 
 
-    <div id="mainBody">
-      <div id="cloud1" class="cloud"></div>
-      <div id="cloud2" class="cloud"></div>
-    </div>  
+	<div id="mainBody">
+		<div id="cloud1" class="cloud"></div>
+		<div id="cloud2" class="cloud"></div>
+	</div>
 
 
-<div class="logintop">    
-    <span>欢迎登录后台管理界面平台</span>    
-    <ul>
-    <li><a href="#">回首页</a></li>
-    <li><a href="#">帮助</a></li>
+	<div class="logintop">
+		<span>欢迎登录后台管理界面平台</span>
+		<ul>
+			<li><a href="#">回首页</a></li>
+			<li><a href="#">帮助</a></li>
 
-    </ul>    
-    </div>
-    
-    <div class="loginbody">
-    
-    <span class="systemlogo"></span> 
-       
-    <div class="loginbox">
-    
-    <ul>
-    <li><input id="username" name="" type="text" class="loginuser" value="admin" onclick="JavaScript:this.value=''"/></li>
-    <li><input id="password" name="" type="text" class="loginpwd" value="密码" onclick="JavaScript:this.value=''"/></li>
-    <li><input name="" type="button" class="loginbtn" value="登录"  onclick="login()"  />
-     <li><div>
-        <input type="text" class="form-control" id="kaptcha" name="kaptcha" placeholder="请输入验证码" style="color:#000000;"/>
-        <img src="kaptcha.jpg" width="200" id="kaptchaImage" title="看不清，点击换一张" />        
-        <br /><small>看不清，点击换一张</small>        
-	</div></li>
-	    <label><input name="" type="checkbox" value="" checked="checked" />记住密码</label><label></label></li>
-	
-     </ul>
-    </div>
-    
-    </div>
-    
-    
-    
-    <div class="loginbm">版权所有  2016  </div>
+		</ul>
+	</div>
+
+	<div class="loginbody">
+
+		<span class="systemlogo"></span>
+
+		<div class="loginbox">
+
+			<ul>
+				<li><input id="username" name="" type="text" class="loginuser"
+					value="admin" onclick="JavaScript:this.value=''" /></li>
+				<li><input id="password" name="" type="text" class="loginpwd"
+					value="密码" onclick="JavaScript:this.value=''" /></li>
+
+				<li><div>
+						<input type="text" class="loginuser" id="kaptcha" name="kaptcha"
+							placeholder="请输入验证码" style="color: #000000;" /> <img
+							src="kaptcha.jpg" width="200" id="kaptchaImage" title="看不清，点击换一张" />
+						<small>看不清，点击换一张</small>
+					</div></li>
+				<label><input name="" type="checkbox" value=""
+					checked="checked" />记住密码</label>
+				<label></label>
+				</li>
+				<li><input name="" type="button" class="loginbtn" value="登录"
+					onclick="login()" />
+			</ul>
+		</div>
+
+	</div>
+
+
+
+	<div class="loginbm">版权所有 2016</div>
 </body>
 </html>
 <SCRIPT Language=VBScript><!--

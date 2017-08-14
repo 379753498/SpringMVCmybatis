@@ -47,7 +47,7 @@ public class LoginContoller {
      * @return 校验结果
      * @since 
      */
-    @RequestMapping(value = "check", method = RequestMethod.POST)
+    @RequestMapping(value = "check.do", method = RequestMethod.POST)
     @ResponseBody
     public String loginCheck(HttpServletRequest request,
 //            @RequestParam(value = "username", required = true) String username,
