@@ -67,7 +67,13 @@ public class LoginContoller {
         // ……
         return "success"; //校验通过返回成功
     }
-	
+    @RequestMapping(value = "getmssge.do", method = RequestMethod.POST)
+    @ResponseBody
+    public String getmssge(){
+        //用户输入的验证码的值
+      
+        return "/myweb/kaptcha.jpg/1.do"; //校验通过返回成功
+    }
 
 
 }
