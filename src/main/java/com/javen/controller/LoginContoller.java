@@ -60,18 +60,24 @@ public class LoginContoller {
         System.out.println(kaptchaExpected);
         System.out.println(kaptchaReceived);
         if (kaptchaReceived == null || !kaptchaReceived.equals(kaptchaExpected)) {
-            return "kaptcha_error";//返回验证码错误
+            return "error";//返回验证码错误
         }
         //校验用户名密码
         // ……
         // ……
         return "success"; //校验通过返回成功
     }
+    
+    /**
+     * 
+     * 
+     * @return  返回请求验证码的路径
+     * @Description:
+     */
     @RequestMapping(value = "getmssge.do", method = RequestMethod.POST)
     @ResponseBody
     public String getmssge(){
-        //用户输入的验证码的值
-      
+              
         return "/myweb/kaptcha.jpg/1.do"; //校验通过返回成功
     }
 

@@ -34,6 +34,7 @@ import com.google.code.kaptcha.impl.DefaultKaptcha;
 public class CaptchaImageCreateController {
 	
 		@Autowired
+		@Qualifier("captchaProducer")
 		 private Producer captchaProducer ;
 
 
@@ -74,4 +75,8 @@ public class CaptchaImageCreateController {
         }
         return null;
     }
+    
+    
+ 
+    
 }

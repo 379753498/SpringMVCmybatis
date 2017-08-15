@@ -31,7 +31,9 @@ $(document).ready(function() {
 	$('#kaptcha').bind({
 
 		focus: function() {
-	
+		
+		
+		$('#smail').html("看不清，点击换一张");
 		},
 		blur: function() {
 			var paramsTime = {
@@ -42,7 +44,22 @@ $(document).ready(function() {
 				url: getContextPath() + "/login/check.do",
 				data: paramsTime,
 				success: function(data) {
-					alert(data);
+					
+					var sqe=data;
+					
+					if(sqe=="error")
+					{
+						$('#smail').html("验证码输入错误");
+					
+					}
+					if(sqe=="success")
+					{
+						$('#smail').html("验证码正确");
+					
+					}
+					
+					
+					
 				}
 			});
 		}
@@ -64,7 +81,6 @@ function login() {
 
 		success: function(data) {
 
-			alert(data);
 
 		},
 		error: function(xhr) {
@@ -73,4 +89,6 @@ function login() {
 		}
 	});
 
+	var time = Math.round(Math.random() * 999) + 3000;
+	$('#kaptchaImage').attr('src', getContextPath() + "/myweb/kaptcha.jpg/" + time + ".do");
 }
