@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>用户注册</title>
+		<script type="text/javascript" src="../js/jquery.1.11.3.min.js"></script>
+		<link href="../Static/bootstrap/css/bootstrap.min.css" rel="stylesheet"></link>
+		<script src="../Static/bootstrap/js/bootstrap.min.js"></script>
+		<script src="../js/register.js" type="text/javascript"></script>
+
+	</head>
+
+	<body	style="background-color: #1c77ac; background-image: url(images/light.png); background-repeat: no-repeat; background-position: center top; overflow: hidden;">
+
+		<center>
+				
+				<h1>
+				<strong> 用户注册</strong></h1>
+				
+		</center>
+		<form  id="formuser" action="" method="post" class="form-horizontal">
+
+			<table class="table table-bordered"  border="1" width="40" >
+				<tr class="success">
+					<td>
+						<blockquote class="pull-right">
+							<strong> 用户名：</strong>
+						</blockquote>
+					</td>
+					<td>
+						<input type="text" id="username" name="username" placeholder="用户名"/>
+					</td>
+				</tr>
+				<tr class="success">
+					<td>
+						<blockquote class="pull-right">
+							<strong>邮箱：</strong>
+						</blockquote>
+					</td>
+					<td>
+						<input type="text" id="Email" name="Email" placeholder="邮箱"/>
+					</td>
+				</tr>
+				<tr class="success">
+					<td>
+						<blockquote class="pull-right">
+							<strong>手机号码：</strong>
+						</blockquote>
+					</td>
+					<td>
+						<input type="text" id="Phone" name="Phone" placeholder="手机号码"/>
+					</td>
+				</tr>
+				<tr class="success">
+					<td>
+						<blockquote class="pull-right">
+							<strong> 密码:</strong>
+						</blockquote>
+					</td>
+					<td>
+						<input type="password" id="password" name="password" placeholder="输入密码"/>
+					</td>
+				</tr>
+				<tr class="success">
+					<td>
+						<blockquote class="pull-right">
+							<strong> 确认密码:</strong>
+						</blockquote>
+					</td>
+					<td>
+						<input type="text" id="passwordto" placeholder="确认密码"/>
+					</td>
+					</tr>
+				<tr class="success">
+					<td>
+						<blockquote class="pull-right">
+							<strong> 验证码：</strong>
+						</blockquote>
+					</td>
+					<td>
+							<input type="text" class="loginuser" id="kaptcha" name="kaptcha"
+							placeholder="请输入验证码" style="color: #000000;" /> 
+							<img src="" width="125" height="45" id="kaptchaImage" title="看不清就点击换一张" />
+						<small id="smail">看不清，点击换一张</small>
+					</td>
+				</tr>
+				<tr class="success">
+					<td>
+
+					</td>
+					<td>
+						<button type="submit" class="btn btn-primary">注册</button>
+					</td>
+				</tr>
+			</table>
+		</form>
+
+	</body>
+
+</html>
