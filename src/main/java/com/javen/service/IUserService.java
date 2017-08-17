@@ -12,4 +12,6 @@ public interface IUserService {
     
     public List<User> selectByname(User user);
     public int Insetuser(User user);
+    public List<User> selectByemailUUid(User user);
+    public int updateuserinfoforemailUUid(User user);
 }  

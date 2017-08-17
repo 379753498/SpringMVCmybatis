@@ -46,6 +46,25 @@ public class UserServiceImpl implements IUserService {
 		}
 		
 		return IUserDaoto.Insetuser(user);
+	}
+
+	@Override
+	public List<User> selectByemailUUid(User user) {
+		// TODO Auto-generated method stub
+		List<User> selectByemailUUid = IUserDaoto.selectByemailUUid(user);
+		if(selectByemailUUid.size()==1)
+		{
+			updateuserinfoforemailUUid(user);
+		}
+		
+		return selectByemailUUid;
+	}
+
+	@Override
+	public int updateuserinfoforemailUUid(User user) {
+		// TODO Auto-generated method stub
+		
+		return IUserDaoto.updateuserinfoforemailUUid(user);
 	}  
   
 }  
