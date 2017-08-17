@@ -9,4 +9,7 @@ public interface IUserService {
     public User getUserById(int userId);  
     
     public List<User> selectByState(Integer state);
+    
+    public List<User> selectByname(User user);
+    public int Insetuser(User user);
 }  

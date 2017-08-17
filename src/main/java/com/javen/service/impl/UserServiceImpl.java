@@ -21,14 +21,31 @@ public class UserServiceImpl implements IUserService {
     @Resource  
     private IUserDaoto IUserDaoto;  
     
-    public User getUserById(int userId) {  
+    public User getUserById(int userId) {
+		return null;  
         // TODO Auto-generated method stub  
-        return this.IUserDaoto.selectByPrimaryKey(userId);  
     }
 
 	public List<User> selectByState(Integer state) {
 		// TODO Auto-generated method stub  
 		return IUserDaoto.selectByState(state);
+	}
+
+	@Override
+	public List<User> selectByname(User user) {
+		return IUserDaoto.selectByUsername(user);
+	}
+
+	@Override
+	public int Insetuser(User user) {
+
+		List<User> selectByname = selectByname(user);
+		if(selectByname.size()>0)
+		{
+			return 0;
+		}
+		
+		return IUserDaoto.Insetuser(user);
 	}  
   
 }  

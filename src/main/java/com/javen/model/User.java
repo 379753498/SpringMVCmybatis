@@ -12,9 +12,11 @@ import org.springframework.stereotype.Component;
 /**
  * 
  *
- * CREATE TABLE `user` (
+ * CREATE TABLE `userinfo` (
   `id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `username` VARCHAR(60) DEFAULT NULL COMMENT '用户名',
+    `password` VARCHAR(60) DEFAULT NULL COMMENT '密码',
+
    `Phone` VARCHAR(60) DEFAULT NULL COMMENT 'Phone',
     `Email` VARCHAR(60) DEFAULT NULL COMMENT 'Email',
   `EmailUUid` VARCHAR(60) DEFAULT NULL COMMENT 'EmailUUid',

@@ -10,8 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.stereotype.Controller;  
 import org.springframework.ui.Model;  
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,16 +30,60 @@ import com.javen.service.IUserService;
 public class UserRegisterController {  
 	private static Logger log=LoggerFactory.getLogger(UserRegisterController.class);
 	
+	@Resource
+	private IUserService UserServiceImpl;
+	
 	
 	@RequestMapping("/register.do")
 	public String UserRegister( User user )
 	{
-		System.out.println(user.toString());
 		
+		user.setState(0);
+		user.setEmailUUid(getRandomString(15));
+		UserServiceImpl.Insetuser(user);
+		System.out.println(user);
 		
 		return "hello";
 		
 		
+	}
+	
+	
+	
+	@RequestMapping("/checkUser.do")
+	@ResponseBody
+	public String checkUser( String username )
+	{
+		
+		
+		
+		return "success";
+		
+		
+	}
+	
+	
+	@RequestMapping("/registercheck.do")
+	@ResponseBody
+	public String registercheck( User user )
+	{
+		
+		
+		return "success";
+		
+		
+	}
+	
+	
+	public static String getRandomString(int length) {
+	    //随机字符串的随机字符库
+	    String KeyString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+	    StringBuffer sb = new StringBuffer();
+	    int len = KeyString.length();
+	    for (int i = 0; i < length; i++) {
+	       sb.append(KeyString.charAt((int) Math.round(Math.random() * (len - 1))));
+	    }
+	    return sb.toString();
 	}
 	
 }  
