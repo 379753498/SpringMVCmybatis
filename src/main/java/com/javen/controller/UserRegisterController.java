@@ -53,7 +53,7 @@ public class UserRegisterController {
 		System.out.println(user);
 		String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+getContextPath+"/"+user.getEmailUUid(); 
 
-		mail.send(user.getEmail(), "淘宝网激活邮件", user.getEmail()+"您好 恭喜您注册成功 请点击下面的链接激活您的账户"+basePath+"/register.do");
+		mail.send(user.getEmail(), "淘宝网激活邮件", user.getUsername()+"您好 恭喜您注册成功 请点击下面的链接激活您的账户"+basePath+"/register.do");
 
 		return "hello";
 		
