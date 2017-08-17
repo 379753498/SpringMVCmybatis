@@ -100,6 +100,10 @@
 		</property>
 	</bean>
 
+<bean id="mial" class="com.sun.mail.util.MailSSLSocketFactory">
+<property name="TrustAllHosts" value="true" />
+
+</bean>
 	<!-- 邮件发送器 -->
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="${mail.host}" />
@@ -111,6 +115,9 @@
 				<prop key="mail.smtp.auth">${mail.smtp.auth}</prop>
 				<prop key="mail.smtp.timeout">${mail.smtp.timeout}</prop>
 				<prop key="mail.smtp.port">${mail.smtp.port}</prop>
+				<prop key="mail.smtp.ssl.enable">${mail.smtp.ssl.enable}</prop>
+				<prop key="mail.smtp.ssl.socketFactory">ref="dataSource"</prop>
+				
 			</props>
 		</property>
 	</bean>
