@@ -40,14 +40,21 @@ public class UserRegisterController {
 
 	
 	@RequestMapping("/register.do")
-	public String UserRegister( User user )
+	public String UserRegister( HttpServletRequest request, User user )
+	
+	
 	{
-		mail.send("379753498@qq.com", "nihao", "nihaohhh");
+		  String getContextPath = request.getContextPath();  
+	
 		user.setState(0);
 		user.setEmailUUid(getRandomString(15));
+		
 		UserServiceImpl.Insetuser(user);
 		System.out.println(user);
-		
+		String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+getContextPath+"/"+user.getEmailUUid(); 
+
+		mail.send(user.getEmail(), "淘宝网激活邮件", user.getEmail()+"您好 恭喜您注册成功 请点击下面的链接激活您的账户"+basePath+"/register.do");
+
 		return "hello";
 		
 		
