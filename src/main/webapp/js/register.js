@@ -12,12 +12,12 @@ function isEmail(strEmail) {
 		return false;
 }
 
-function  gettoken() {
-//获取token 访问后后台会给页面返回一个key token的变量
+function gettoken() {
+	// 获取token 访问后后台会给页面返回一个key token的变量
 	$.ajax({
 		type : "POST",
 		url : getContextPath() + "/token.do",
-		data :{} ,
+		data : {},
 		success : function(data) {
 
 			$('#token').attr('value', data);
@@ -26,19 +26,16 @@ function  gettoken() {
 	});
 }
 
-function  inserttoken() {
-
-	
+function check() {
 
 }
 
-
 $(document).ready(
 		function() {
-			
+
+			// $('#button').click(function() { });
 			gettoken();
-		
-			
+
 			// 请求表单token值
 			$('#username')
 
@@ -47,6 +44,7 @@ $(document).ready(
 			$('#username').bind({
 
 				focus : function() {
+
 					$("#username").nextAll().remove();
 					$("#username").after("<p>鼠标点击空白处可立即检测用户名合法性</p>");
 
@@ -65,7 +63,7 @@ $(document).ready(
 							var sqe = data;
 
 							if (sqe == "error") {
-								$('#smail').html("验证码输入错误");
+
 								$("#username").after("<p>用户名已经存在</p>");
 
 							}
@@ -76,6 +74,7 @@ $(document).ready(
 
 						}
 					});
+
 				}
 			})
 			// 动态设置注册提交的控制器
@@ -195,6 +194,7 @@ $(document).ready(
 					var isemmail = isEmail(email.val());
 					if (!isemmail) {
 						$("#Email").after("<p>邮箱格式错误</p>");
+
 					}
 
 				}

@@ -14,4 +14,6 @@ public interface IUserService {
     public int Insetuser(User user);
     public List<User> selectByemailUUid(User user);
     public int updateuserinfoforemailUUid(User user);
+    
+	public List<User> selectUserpasswowrdcheck(User user);
 }  

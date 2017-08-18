@@ -33,6 +33,8 @@ public class UserServiceImpl implements IUserService {
 
 	@Override
 	public List<User> selectByname(User user) {
+		
+		
 		return IUserDaoto.selectByUsername(user);
 	}
 
@@ -65,6 +67,12 @@ public class UserServiceImpl implements IUserService {
 		// TODO Auto-generated method stub
 		
 		return IUserDaoto.updateuserinfoforemailUUid(user);
+	}
+
+	@Override
+	public List<User> selectUserpasswowrdcheck(User user) {
+		// TODO Auto-generated method stub  
+		return IUserDaoto.selectUserpasswowrdcheck(user);
 	}  
   
 }  

@@ -22,6 +22,10 @@ public interface IUserDaoto  {
     @Select("select * from userinfo where username = #{username}")
 	public List<User> selectByUsername(User user);
     
+    @Select("select * from userinfo where username = #{username} and passwowrd = #{passwowrd}")
+   	public List<User> selectUserpasswowrdcheck(User user);
+       
+    
     @Select("select * from userinfo where EmailUUid = #{emailUUid}")
 	public List<User> selectByemailUUid(User user);
     

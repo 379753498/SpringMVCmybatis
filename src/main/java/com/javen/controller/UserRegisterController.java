@@ -84,10 +84,22 @@ public class UserRegisterController {
 	
 	@RequestMapping("/checkUser.do")
 	@ResponseBody
-	public String checkUser( String username )
+	public String checkUser( User user )
 	{
-		return "success";
 		
+		
+		List<User> selectByname = UserServiceImpl.selectByname(user);
+		System.out.println(user);
+		if (selectByname.size()>0)
+		{
+			return "error";
+		}
+		else
+		{
+			return "success";
+		}
+		
+	
 		
 	}
 	

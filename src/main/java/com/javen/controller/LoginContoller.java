@@ -1,7 +1,9 @@
 package com.javen.controller;  
 
+import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
@@ -11,28 +13,38 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.javen.model.User;
+import com.javen.service.IUserService;
+
 @Controller  
 @RequestMapping("/login")
 public class LoginContoller {
+	@Resource
+	private IUserService UserService;
 	
 	@RequestMapping("/login.do")
 	@ResponseBody
-	public String  login( HttpServletRequest rs)
+	public String login( HttpServletRequest rs,User user)
 	{
-		String username = rs.getParameter("username");
-		String password = rs.getParameter("password");
 		
-		if(username.equals("xujian"))
+		String	kaptchaReceived=rs.getParameter("kaptcha");
+		String kaptchloginCheck = loginCheck(rs, kaptchaReceived);
+		
+		if(kaptchloginCheck.equals("success"))
+			
 		{
-		return "/page/main.html";
+			List<User> selectUserpasswowrdcheck = UserService.selectUserpasswowrdcheck(user);
+			
+			if(selectUserpasswowrdcheck.size()==1&&selectUserpasswowrdcheck.get(0).getState()==1)
+				
+			{
+				return "/page/main.html" ;
+			}
+			
+			
 		}
-		else
-		{
-		return "/login.html";
+		return "error";
 		
-		
-
-		}
 	}
 
 	
