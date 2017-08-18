@@ -58,6 +58,8 @@
 	<welcome-file-list>
 		<welcome-file>/index.html</welcome-file>
 		<welcome-file>/SpringMVCmybatis/login.html</welcome-file>
+		
+		
 	</welcome-file-list>
 
 </web-app>  

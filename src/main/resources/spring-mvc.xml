@@ -17,6 +17,14 @@
     <mvc:annotation-driven/>
     <!-- 静态资源处理  css js imgs -->
     <mvc:resources location="/resources/**" mapping="/resources"/>
+    <!-- 拦截器配置 -->
+		<mvc:interceptors>
+        	<!-- 配置Token拦截器，防止用户重复提交数据 -->
+       	 <mvc:interceptor>
+            <mvc:mapping path="/**"/><!--这个地方时你要拦截得路径 我这个意思是拦截所有得URL-->
+            <bean class="com.javen.interceptor.imp.TokenInterceptor"/><!--class文件路径改成你自己写得拦截器路径！！ -->
+        </mvc:interceptor>
+		</mvc:interceptors>
     
     <!--避免IE执行AJAX时，返回JSON出现下载文件 -->  
     <bean id="mappingJacksonHttpMessageConverter"  
@@ -70,6 +78,8 @@
         </property>
         <property name="ignoreAcceptHeader" value="true"></property>
     </bean>
+    
+    
     
    <!-- 定义跳转的文件的前后缀 ，视图模式配置-->  
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">  

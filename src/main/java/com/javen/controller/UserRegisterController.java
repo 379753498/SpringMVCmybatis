@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.javen.interceptor.annotation.Tokenannotation;
 import com.javen.mail.MailUtil;
 import com.javen.model.User;
 import com.javen.service.IUserService;
@@ -40,6 +42,7 @@ public class UserRegisterController {
 
 	
 	@RequestMapping("/register.do")
+	@Tokenannotation(remove=true)
 	public String UserRegister( HttpServletRequest request, User user)
 	{
 		String getContextPath = request.getContextPath();  
@@ -64,6 +67,19 @@ public class UserRegisterController {
 		
 	}
 	
+	@RequestMapping("/token.do")
+	@ResponseBody
+	@Tokenannotation(save=true)
+	public String gettoken(HttpServletRequest rs)
+	{
+		 Object attribute = rs.getSession().getAttribute("token");
+		
+
+		System.out.println(attribute.toString());
+		return attribute.toString();
+		
+		
+	}
 	
 	
 	@RequestMapping("/checkUser.do")
