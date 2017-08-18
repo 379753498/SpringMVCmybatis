@@ -89,9 +89,10 @@ public class UserRegisterController {
 		
 		
 		List<User> selectByname = UserServiceImpl.selectByname(user);
-		System.out.println(user);
+		
 		if (selectByname.size()>0)
 		{
+			System.out.println(selectByname.get(0));
 			return "error";
 		}
 		else
