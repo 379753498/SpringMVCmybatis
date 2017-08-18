@@ -52,6 +52,9 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
             return true;
         }
         String clinetToken = request.getParameter("token");
+        System.out.println("serverToken"+serverToken);
+
+        System.out.println("clinetToken"+clinetToken);
         if (clinetToken == null) {
             return true;
         }

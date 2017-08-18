@@ -20,6 +20,7 @@ function  gettoken() {
 		data :{} ,
 		success : function(data) {
 
+			$('#token').attr('value', data);
 		}
 
 	});
