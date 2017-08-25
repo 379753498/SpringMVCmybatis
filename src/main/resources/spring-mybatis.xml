@@ -23,8 +23,6 @@
 		</property>
 	</bean>
 
-<bean class="com.mangofactory.swagger.configuration.SpringSwaggerConfig" />
-<bean class="com.javan.Swagger.MySwagger2Config" />
 
 <!--单个配置文件格式  bean id="propertyConfigurer"  
         class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">  
