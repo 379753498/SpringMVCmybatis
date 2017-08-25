@@ -10,7 +10,7 @@
 
 	<properties>
 		<!-- spring版本号 -->
-		<spring.version>4.0.2.RELEASE</spring.version>
+		<spring.version>4.3.2.RELEASE</spring.version>
 		<!-- mybatis版本号 -->
 		<mybatis.version>3.2.6</mybatis.version>
 		<!-- log4j日志文件管理包版本 -->
@@ -174,13 +174,23 @@
 			<artifactId>commons-codec</artifactId>
 			<version>1.9</version>
 		</dependency>
-		<!-- 没有用到的包可以去掉 -->
-		<dependency>
-			<groupId>tk.mybatis</groupId>
-			<artifactId>mapper</artifactId>
-			<version>3.3.7</version>
+		<!-- Spring 升级4+ 依赖的JSON包 -->
+			<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.7.4</version>
 		</dependency>
-
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.7.4</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>2.7.4</version>
+		</dependency>
+		<!-- Spring 升级4+ 依赖的JSON包 -->
 		<!-- Kaptcha验证码框架 -->
 
 		<dependency>
