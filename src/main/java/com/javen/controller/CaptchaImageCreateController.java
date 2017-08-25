@@ -40,7 +40,7 @@ import com.google.code.kaptcha.impl.DefaultKaptcha;
  *
  * @author 
  */
-@Api(value = "/tom")
+
 @Controller
 @RequestMapping("/myweb")
 public class CaptchaImageCreateController {
@@ -48,17 +48,10 @@ public class CaptchaImageCreateController {
 		@Autowired
 		@Qualifier("captchaProducer")
 		 private Producer captchaProducer ;
-
-
-	
-  
-    @ApiOperation(value="创建用户", notes="根据请求生成验证码")
-    @ApiImplicitParams({
-    	@ApiImplicitParam(dataType = "java.lang.String", name = "id", value = "id", required = true, paramType = "path")
-    })
+		
     @RequestMapping("/kaptcha.jpg/{id}.do")
-    @ResponseBody
-    public String handleRequest(HttpServletRequest request, HttpServletResponse response ,@PathVariable ("id") String id) throws Exception{
+
+    public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response ,@PathVariable ("id") String id) throws Exception{
     	
     	System.out.println(id);
         // Set to expire far in the past.
@@ -91,7 +84,7 @@ public class CaptchaImageCreateController {
         } finally {
             out.close();
         }
-        return capText;
+        return null;
     }
     
     
