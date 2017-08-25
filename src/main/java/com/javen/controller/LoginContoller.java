@@ -28,7 +28,7 @@ public class LoginContoller {
 	{
 		
 		String	kaptchaReceived=rs.getParameter("kaptcha");
-		String kaptchloginCheck = loginCheck(rs, kaptchaReceived);
+		String kaptchloginCheck = loginCheckkaptcha(rs, kaptchaReceived);
 		
 		if(kaptchloginCheck.equals("success"))
 			
@@ -53,24 +53,17 @@ public class LoginContoller {
      *
      * @author 
      * @param request
-     * @param username 用户名
-     * @param password 密码
      * @param kaptchaReceived 验证码
      * @return 校验结果
      * @since 
      */
     @RequestMapping(value = "check.do", method = RequestMethod.POST)
     @ResponseBody
-    public String loginCheck(HttpServletRequest request,//            @RequestParam(value = "username", required = true) String username,
-//            @RequestParam(value = "password", required = true) String password,
-            @RequestParam(value = "kaptcha", required = true) String kaptchaReceived){
+    public String loginCheckkaptcha(HttpServletRequest request,@RequestParam(value = "kaptcha", required = true) String kaptchaReceived){
         //用户输入的验证码的值
         String kaptchaExpected = (String) request.getSession().getAttribute(
                 com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
         //校验验证码是否正确
-       
-        System.out.println(kaptchaExpected);
-        System.out.println(kaptchaReceived);
         if (kaptchaReceived == null || !kaptchaReceived.equals(kaptchaExpected)) {
             return "error";//返回验证码错误
         }
