@@ -10,7 +10,9 @@
                         http://www.springframework.org/schema/mvc    
                         http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 	<!-- Spring自动装配扫描@Component 在类名称上即可扫描到 -->
-	<context:component-scan base-package="com.javen" />
+		<context:component-scan base-package="com.javen">
+		
+		</context:component-scan>
 
 	<!-- 引入配置文件 -->
 	<bean id="propertyConfigurer"
