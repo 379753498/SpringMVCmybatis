@@ -40,6 +40,25 @@ public class UserRegisterController {
 	@Resource
 	private MailUtil mail;
 
+
+	@RequestMapping("/register")
+	public ModelAndView register( HttpServletRequest request)
+	{
+		  //4、选择下一个页面  
+	       ModelAndView mv = new ModelAndView();  
+	       //添加模型数据 可以是任意的POJO对象  
+	       mv.addObject("message", "Hello World!");  
+	       //设置逻辑视图名，视图解析器会根据该名字解析到具体的视图页面  
+	       mv.setViewName("register");  
+	       return mv;  
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 	@RequestMapping("/register.do")
 	@Tokenannotation(remove=true)
@@ -75,7 +94,7 @@ public class UserRegisterController {
 		 Object attribute = rs.getSession().getAttribute("token");
 		
 
-		System.out.println(attribute.toString());
+		System.out.println(attribute.toString()+"token");
 		return attribute.toString();
 		
 		
