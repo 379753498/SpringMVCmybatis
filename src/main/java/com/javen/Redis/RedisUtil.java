@@ -28,18 +28,17 @@ import redis.clients.jedis.JedisPoolConfig;
  * Created by tl on 17/2/16. 
  */  
 @Component
-public class RedisTemplateUtil {  
+public class RedisUtil {  
   
-	  
-	private Logger logger = Logger.getLogger(RedisTemplateUtil.class); 
+	RedisUtil()
+	{
+		System.out.println("aa");
+	}
+	private Logger logger = Logger.getLogger(RedisUtil.class); 
 	
 
 	  private RedisTemplate<Serializable, Object> redisTemplate; 
-//	  
-//	  @Autowired
-//	  private JedisPoolConfig jedisPoolConfig;
-//	  @Autowired
-//	  private JedisConnectionFactory jedisConnectionFactory;
+
 	  @Autowired
 	  public void setRedisTemplate(RedisTemplate<Serializable, Object> redisTemplate) {
 			this.redisTemplate = redisTemplate;
