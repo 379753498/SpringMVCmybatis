@@ -9,6 +9,7 @@ import com.javen.Redis.RedisUtil;
 /**
  * 
  * 如要进行此项测试需要将SwaggerConfig 中注解在类头上的注解取消否则会报错
+ * Windows  需要安装redis服务功能  安装详细请参阅http://www.runoob.com/redis/redis-install.html
  *@Title:  
  *@Description:  
  *@Author:Administrator  
