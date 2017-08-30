@@ -42,8 +42,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 	 */
 	  public static ApplicationContext getApplicationContextlzy() {  
 	        if (ApplicationContext == null) {  
-	        	ApplicationContext =  new ClassPathXmlApplicationContext("classpath:**/spring-mybatis*.xml"); 
+	        	ApplicationContext =  new ClassPathXmlApplicationContext("classpath:spring-mybatis.xml"); 
 	        }  
+	       
 	        SetApplicationContext(ApplicationContext);
 	        return ApplicationContext;  
 	    }  

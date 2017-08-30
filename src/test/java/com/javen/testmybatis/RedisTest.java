@@ -6,9 +6,17 @@ import org.springframework.context.ApplicationContext;
 import com.javen.Redis.RedisUtil;
 
 
-
+/**
+ * 
+ * 如要进行此项测试需要将SwaggerConfig 中注解在类头上的注解取消否则会报错
+ *@Title:  
+ *@Description:  
+ *@Author:Administrator  
+ *@Since:2017年8月30日  
+ *@Version:1.1.0
+ */
   
-public class Springinit {
+public class RedisTest {
 
 	
 	public static void main(String[] args) {
@@ -21,10 +29,8 @@ public class Springinit {
 		}
 		
 		RedisUtil bean = applicationContextlzy.getBean(RedisUtil.class);
-		
-//		bean.set("xujian", "chenggang");
-//		Object object = bean.get("xujian");
-//		
-//		System.out.println(object.toString());
+		bean.set("xujian", "程刚....redis");
+		Object object = bean.get("xujian");
+		System.out.println(object.toString());
 	}
 }
