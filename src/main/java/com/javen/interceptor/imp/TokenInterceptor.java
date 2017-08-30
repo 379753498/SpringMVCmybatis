@@ -20,7 +20,7 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
         if (handler instanceof HandlerMethod) {
         	HttpSession session = request.getSession();
          	
-        	System.out.println("我在拦截"+request.getServletPath()+session.getId());
+        	System.out.println("我在拦截"+request.getServletPath());
             HandlerMethod handlerMethod = (HandlerMethod) handler;
             Method method = handlerMethod.getMethod();
             Tokenannotation annotation = method.getAnnotation(Tokenannotation.class);
