@@ -72,12 +72,13 @@ function checkeusername()
 			var sqe = data;
 
 			if (sqe == "error") {
-
+				$("#username").nextAll().remove();
 				$("#username").after("<p>用户名已经存在</p>");
 				return false;
 
 			}
 			if (sqe == "success") {
+				$("#username").nextAll().remove();
 				$("#username").after("<p>用户名可用</p>");
 				return true;
 			}
@@ -110,11 +111,12 @@ function passwordcheck()
 
 function checkekaptchacode()
 {
-		var paramsTime = $('#kaptcha').value;
+		var kaptcha = $('#kaptcha').val();
+		
 					$.ajax({
 						type : "POST",
 						url : getContextPath() + "/login/check.do",
-						data : paramsTime,
+						data : {"kaptcha":kaptcha},
 						success : function(data) {
 
 							var sqe = data;
