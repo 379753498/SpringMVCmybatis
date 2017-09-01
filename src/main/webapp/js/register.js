@@ -5,11 +5,15 @@ function getContextPath() {
 	return result;
 }
 function isEmail(strEmail) {
-	if (strEmail
-			.search(/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/) != -1)
+	if (strEmail.search(/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/) != -1)
+		{
 		return true;
+		}
 	else
+		{
 		return false;
+		}
+		
 }
 
 function gettoken() {
@@ -27,90 +31,86 @@ function gettoken() {
 }
 
 function check() {
+	
+	
+	if(isEmail($("#Email").val())&&checkeusername()&&passwordcheck()&&checkekaptchacode())
+		{
+		return true;
+		
+		}
+	else
+		{
+		alert("您的输入不符合规范，请重新输入正确信息再次提交");
+		return false;
+		}
+	
 
 }
 
-$(document).ready(
-		function() {
+function getkaptchaImage()//获取验证码图片方法
+{
+	
+	$.ajax({
+		type : "POST",
+		url : getContextPath() + "/login/getmssge.do",
+		success : function(data) {
+			$('#kaptchaImage').attr('src', getContextPath() + data);
+		}
+	});
+	}
 
-			// $('#button').click(function() { });
-			gettoken();
 
-			// 请求表单token值
-			$('#username')
+function checkeusername()
+{
+	var username =$("#username").val();
 
-			// $("#button").attr({ "disabled": "disabled"}); // 设置注册按钮不可用状态
-			// 用户名合法性检测
-			$('#username').bind({
+	$.ajax({
+		type : "POST",
+		url : getContextPath() + "/checkUser.do",
+		data : {'username':username},
+		success : function(data) {
+			var sqe = data;
 
-				focus : function() {
+			if (sqe == "error") {
 
-					$("#username").nextAll().remove();
-					$("#username").after("<p>鼠标点击空白处可立即检测用户名合法性</p>");
+				$("#username").after("<p>用户名已经存在</p>");
+				return false;
 
-				},
-				blur : function() {
-					var username = {
-						username : this.value
-					};
+			}
+			if (sqe == "success") {
+				$("#username").after("<p>用户名可用</p>");
+				return true;
+			}
 
-					$("#username").nextAll().remove();
-					$.ajax({
-						type : "POST",
-						url : getContextPath() + "/checkUser.do",
-						data : username,
-						success : function(data) {
-							var sqe = data;
+		}
+	});
 
-							if (sqe == "error") {
 
-								$("#username").after("<p>用户名已经存在</p>");
+}
 
-							}
-							if (sqe == "success") {
-								$("#username").after("<p>用户名可用</p>");
 
-							}
+function passwordcheck()
+{
+	
 
-						}
-					});
 
-				}
-			})
-			// 动态设置注册提交的控制器
-			$('#formuser').attr('action', getContextPath() + '/register.do');
+	$("#passwordto").nextAll().remove();
+	$("#password").nextAll().remove();
+	var password = $('#password').val();
 
-			// 第一次访问页面请求验证码
-			$.ajax({
-				type : "POST",
-				url : getContextPath() + "/login/getmssge.do",
-				success : function(data) {
-					$('#kaptchaImage').attr('src', getContextPath() + data);
-				}
-			});
+	var passwordto = $('#passwordto').val();
 
-			// 验证码点击更换功能模块
-			$('#kaptchaImage').click(
-					function() {
+	if (password != passwordto) {
 
-						var time = Math.round(Math.random() * 999) + 3000;
-						$(this).attr(
-								'src',
-								getContextPath() + "/myweb/kaptcha.jpg/" + time
-										+ ".do");
+		$("#password").after("<p>密码不一致</p>");
+		return false;
+	}
+	return true;
+}
 
-					});
-			// 验证码输入框绑定事件
-			$('#kaptcha').bind({
-
-				focus : function() {
-
-					$('#smail').html("看不清，点击换一张");
-				},
-				blur : function() {
-					var paramsTime = {
-						kaptcha : this.value
-					};
+function checkekaptchacode()
+{
+		var paramsTime = $('#kaptcha').value;
 					$.ajax({
 						type : "POST",
 						url : getContextPath() + "/login/check.do",
@@ -121,15 +121,53 @@ $(document).ready(
 
 							if (sqe == "error") {
 								$('#smail').html("  验证码输入错误");
-
+								return false;
 							}
 							if (sqe == "success") {
 								$('#smail').html("     验证码正确");
-
+								return true;
 							}
 
 						}
 					});
+}
+
+
+$(document).ready(
+		function() {
+			$('#formuser').attr('action', getContextPath() + '/register.do');// 动态设置注册提交的控制器
+			gettoken();// 请求表单token值 默认页面加载完毕就进行请求
+			getkaptchaImage();//获取验证码请求
+			// 用户名合法性监听事件
+			$('#username').bind({
+				focus : function() {
+					$("#username").nextAll().remove();
+					$("#username").after("<p>鼠标点击空白处可立即检测用户名合法性</p>");
+				},
+				blur : function() {
+					checkeusername();
+				}
+			})
+			
+
+			// 验证码点击更换功能模块
+			$('#kaptchaImage').click(
+					function() {
+
+						var time = Math.round(Math.random() * 999) + 3000;
+						$(this).attr('src',getContextPath() + "/myweb/kaptcha.jpg/" + time+ ".do");
+
+					});
+			// 验证码输入框绑定事件
+			$('#kaptcha').bind({
+
+				focus : function() {
+
+					$('#smail').html("看不清，点击换一张");
+				},
+				blur : function() {
+					checkekaptchacode();
+					
 				}
 			});
 
@@ -146,19 +184,7 @@ $(document).ready(
 					$("#password").nextAll().remove();
 				},
 				blur : function() {
-
-					$("#passwordto").nextAll().remove();
-					$("#password").nextAll().remove();
-					var password = $('#password').val();
-
-					var passwordto = $('#passwordto').val();
-
-					if (password != passwordto) {
-
-						$("#password").after("<p>密码不一致</p>");
-
-					}
-
+					passwordcheck();
 				}
 			});
 			// 检测密码和输入是否一致passwordto、 password
@@ -169,17 +195,13 @@ $(document).ready(
 					$("#passwordto").nextAll().remove();
 				},
 				blur : function() {
-
-					$("#passwordto").nextAll().remove();
-					$("#password").nextAll().remove();
-					var password = $('#password').val();
-					var passwordto = $('#passwordto').val();
-					if (password != passwordto) {
-						$("#passwordto").after("<p>密码不一致</p>");
-					}
+					passwordcheck();
 				}
 			});
 
+			
+			
+		
 			// 验证邮箱是否合法
 
 			$("#Email").bind(
