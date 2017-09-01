@@ -61,6 +61,7 @@ public class LoginContoller {
     @ResponseBody
     public String loginCheckkaptcha(HttpServletRequest request,@RequestParam(value = "kaptcha", required = true) String kaptchaReceived){
         //用户输入的验证码的值
+    	System.out.println(kaptchaReceived);
         String kaptchaExpected = (String) request.getSession().getAttribute(
                 com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
         //校验验证码是否正确
