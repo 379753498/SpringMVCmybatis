@@ -70,8 +70,8 @@ public class UserRegisterController {
 		UserServiceImpl.Insetuser(user);
 		System.out.println(user);
 		String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+getContextPath+"/"+user.getEmailUUid(); 
-		mail.send(user.getEmail(), "淘宝网激活邮件", user.getUsername()+"您好 恭喜您注册成功 请点击下面的链接激活您的账户"+basePath+"/register.do");
-		return "hello";
+//		mail.send(user.getEmail(), "淘宝网激活邮件", user.getUsername()+"您好 恭喜您注册成功 请点击下面的链接激活您的账户"+basePath+"/register.do");
+		return "main";
 	}
 	
 	
@@ -106,9 +106,9 @@ public class UserRegisterController {
 	public String checkUser( User user )
 	{
 		
-		
+		System.out.println(user.getUsername());
 		List<User> selectByname = UserServiceImpl.selectByname(user);
-		
+		System.out.println(selectByname.size());
 		if (selectByname.size()>0)
 		{
 			System.out.println(selectByname.get(0));
