@@ -22,28 +22,11 @@ public class LoginContoller {
 	@Resource
 	private IUserService UserService;
 	
-	@RequestMapping("/login.do")
-	@ResponseBody
-	public String login( HttpServletRequest rs,User user)
+	@RequestMapping("")
+	
+	public String login( )
 	{
-		
-		String	kaptchaReceived=rs.getParameter("kaptcha");
-		String kaptchloginCheck = loginCheckkaptcha(rs, kaptchaReceived);
-		
-		if(kaptchloginCheck.equals("success"))
-			
-		{
-			List<User> selectUserpasswowrdcheck = UserService.selectUserpasswowrdcheck(user);
-			
-			if(selectUserpasswowrdcheck.size()==1&&selectUserpasswowrdcheck.get(0).getState()==1)
-				
-			{
-				return "/page/main.html" ;
-			}
-			
-			
-		}
-		return "error";
+		return "login";
 		
 	}
 
@@ -61,9 +44,9 @@ public class LoginContoller {
     @ResponseBody
     public String loginCheckkaptcha(HttpServletRequest request,@RequestParam(value = "kaptcha", required = true) String kaptchaReceived){
         //用户输入的验证码的值
-    	System.out.println(kaptchaReceived);
         String kaptchaExpected = (String) request.getSession().getAttribute(
                 com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
+
         //校验验证码是否正确
         if (kaptchaReceived == null || !kaptchaReceived.equals(kaptchaExpected)) {
             return "error";//返回验证码错误

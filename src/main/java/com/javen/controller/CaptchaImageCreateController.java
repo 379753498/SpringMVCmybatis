@@ -37,9 +37,9 @@ public class CaptchaImageCreateController {
 		
     @RequestMapping("/kaptcha.jpg/{id}.do")
 
-    public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response ,@PathVariable ("id") String id) throws Exception{
+    public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response ) throws Exception{
     	
-    	System.out.println(id);
+    	
         // Set to expire far in the past.
         response.setDateHeader("Expires", 0);
         // Set standard HTTP/1.1 no-cache headers.
