@@ -5,15 +5,13 @@ function getContextPath() {
 	return result;
 }
 function isEmail(strEmail) {
-	if (strEmail.search(/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/) != -1)
-		{
+	if (strEmail
+			.search(/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/) != -1) {
 		return true;
-		}
-	else
-		{
+	} else {
 		return false;
-		}
-		
+	}
+
 }
 
 function gettoken() {
@@ -31,25 +29,21 @@ function gettoken() {
 }
 
 function check() {
-	
-	
-	if(isEmail($("#Email").val())&&checkeusername()&&passwordcheck()&&checkekaptchacode())
-		{
+
+	if (isEmail($("#Email").val()) && checkeusername() && passwordcheck()
+			&& checkekaptchacode()) {
 		return true;
-		
-		}
-	else
-		{
+
+	} else {
 		alert("您的输入不符合规范，请重新输入正确信息再次提交");
 		return false;
-		}
-	
+	}
 
 }
 
-function getkaptchaImage()//获取验证码图片方法
+function getkaptchaImage()// 获取验证码图片方法
 {
-	
+
 	$.ajax({
 		type : "POST",
 		url : getContextPath() + "/login/getmssge.do",
@@ -57,43 +51,40 @@ function getkaptchaImage()//获取验证码图片方法
 			$('#kaptchaImage').attr('src', getContextPath() + data);
 		}
 	});
-	}
+}
 
-
-function checkeusername()
-{
-	var username =$("#username").val();
+function checkeusername() {
+	var username = $("#username").val();
+	var checke;
 
 	$.ajax({
 		type : "POST",
 		url : getContextPath() + "/checkUser.do",
-		data : {'username':username},
+		data : {
+			'username' : username
+		},
+		async : false,
 		success : function(data) {
 			var sqe = data;
 
 			if (sqe == "error") {
 				$("#username").nextAll().remove();
 				$("#username").after("<p>用户名已经存在</p>");
-				return false;
+				checke = false;
 
 			}
 			if (sqe == "success") {
 				$("#username").nextAll().remove();
 				$("#username").after("<p>用户名可用</p>");
-				return true;
+				checke = true;
 			}
 
 		}
 	});
-
-
+	return checke;
 }
 
-
-function passwordcheck()
-{
-	
-
+function passwordcheck() {
 
 	$("#passwordto").nextAll().remove();
 	$("#password").nextAll().remove();
@@ -109,37 +100,40 @@ function passwordcheck()
 	return true;
 }
 
-function checkekaptchacode()
-{
-		var kaptcha = $('#kaptcha').val();
-		
-					$.ajax({
-						type : "POST",
-						url : getContextPath() + "/login/check.do",
-						data : {"kaptcha":kaptcha},
-						success : function(data) {
+function checkekaptchacode() {
+	var kaptcha = $('#kaptcha').val();
+	var checkekaptchacode;
+	$.ajax({
+		type : "POST",
+		url : getContextPath() + "/login/check.do",
+		data : {
+			"kaptcha" : kaptcha
+		},
+		async : false,
+		success : function(data) {
 
-							var sqe = data;
+			var sqe = data;
 
-							if (sqe == "error") {
-								$('#smail').html("  验证码输入错误");
-								return false;
-							}
-							if (sqe == "success") {
-								$('#smail').html("     验证码正确");
-								return true;
-							}
+			if (sqe == "error") {
+				$('#smail').html("  验证码输入错误");
+				checkekaptchacode = false;
+			}
+			if (sqe == "success") {
+				$('#smail').html("     验证码正确");
+				checkekaptchacode = true;
+			}
 
-						}
-					});
+		}
+	});
+	return checkekaptchacode;
+
 }
-
 
 $(document).ready(
 		function() {
 			$('#formuser').attr('action', getContextPath() + '/register.do');// 动态设置注册提交的控制器
 			gettoken();// 请求表单token值 默认页面加载完毕就进行请求
-			getkaptchaImage();//获取验证码请求
+			getkaptchaImage();// 获取验证码请求
 			// 用户名合法性监听事件
 			$('#username').bind({
 				focus : function() {
@@ -150,14 +144,16 @@ $(document).ready(
 					checkeusername();
 				}
 			})
-			
 
 			// 验证码点击更换功能模块
 			$('#kaptchaImage').click(
 					function() {
 
 						var time = Math.round(Math.random() * 999) + 3000;
-						$(this).attr('src',getContextPath() + "/myweb/kaptcha.jpg/" + time+ ".do");
+						$(this).attr(
+								'src',
+								getContextPath() + "/myweb/kaptcha.jpg/" + time
+										+ ".do");
 
 					});
 			// 验证码输入框绑定事件
@@ -169,7 +165,7 @@ $(document).ready(
 				},
 				blur : function() {
 					checkekaptchacode();
-					
+
 				}
 			});
 
@@ -201,9 +197,6 @@ $(document).ready(
 				}
 			});
 
-			
-			
-		
 			// 验证邮箱是否合法
 
 			$("#Email").bind(
