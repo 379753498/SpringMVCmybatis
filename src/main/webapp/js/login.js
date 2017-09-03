@@ -5,6 +5,11 @@ function getContextPath() {
 	return result;
 }
 
+function register()
+{
+	window.location.href="register";
+}
+
 $(document).ready(function() {
 	$(function() {
 		$('.loginbox').css({ 'position': 'absolute', 'left': ($(window).width() - 692) / 2 });
