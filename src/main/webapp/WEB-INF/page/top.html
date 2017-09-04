@@ -26,10 +26,13 @@ $(function(){
 			type : "POST",
 			url : getContextPath() + "/remosession",
 			data : {},
+			async : true,
 			success : function(data) {
 				if(data!="success")
-					
 					{alert("退出session失败");}
+				else{
+					window.location.href = "login";
+				}
 			}
 
 		});
@@ -54,7 +57,7 @@ $(function(){
     <ul>
     <li><span><img src="images/help.png" title="帮助"  class="helpimg"/></span><a href="#">帮助</a></li>
     <li><a href="#">关于</a></li>
-    <li><a href="login" target="_parent" id="loginout">退出</a></li>
+    <li><a a href="login" target="_parent" id="loginout">退出</a></li>
     </ul>
      
   
