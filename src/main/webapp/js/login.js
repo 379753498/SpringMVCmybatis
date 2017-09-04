@@ -107,7 +107,6 @@ function login() {
 		async : true,
 
 		success : function(data) {
-			alert(data);
 			window.location.href = data;
 		},
 		error : function(xhr) {
