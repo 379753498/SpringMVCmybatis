@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -19,11 +21,12 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         if (handler instanceof HandlerMethod) {
         	HttpSession session = request.getSession();
-         	
+        
         	System.out.println("我在拦截"+request.getServletPath());
             HandlerMethod handlerMethod = (HandlerMethod) handler;
             Method method = handlerMethod.getMethod();
             Tokenannotation annotation = method.getAnnotation(Tokenannotation.class);
+      
             if (annotation != null) {
                 boolean needSaveSession = annotation.save();
                 if (needSaveSession) {
@@ -44,6 +47,8 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
         } else {
             return super.preHandle(request, response, handler);
         }
+        
+      
     }
 
     private boolean isRepeatSubmit(HttpServletRequest request) {
@@ -61,4 +66,7 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
         }
         return false;
     }
+
+
+
 }
