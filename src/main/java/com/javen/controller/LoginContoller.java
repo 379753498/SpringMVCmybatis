@@ -22,14 +22,6 @@ public class LoginContoller {
 	@Resource
 	private IUserService UserService;
 	
-	@RequestMapping("")
-	
-	public String login( )
-	{
-		return "login";
-		
-	}
-
 	
 	/**
      * loginCheck:ajax异步校验登录请求. <br/>
@@ -57,18 +49,40 @@ public class LoginContoller {
         return "success"; //校验通过返回成功
     }
     
-    /**
-     * 
-     * 
-     * @return  返回请求验证码的路径
-     * @Description:
-     */
-    @RequestMapping(value = "getmssge.do", method = RequestMethod.POST)
+    
+    @RequestMapping(value = "login", method = RequestMethod.POST)
     @ResponseBody
-    public String getmssge(){
-              
-        return "/myweb/kaptcha.jpg/1.do"; //校验通过返回成功
-    }
+    public String login(HttpServletRequest request,@RequestParam(value = "kaptcha", required = true) String kaptchaReceived,User user){
+        //用户输入的验证码的值
+    	
+        String kaptchaExpected = (String) request.getSession().getAttribute(
+                com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
 
+        //校验验证码是否正确
+        if (kaptchaReceived == null || !kaptchaReceived.equals(kaptchaExpected)) {
+
+            return "login";//返回验证码错误
+        }
+        //校验用户名密码
+        // ……
+        // ……
+        System.out.println(user);
+        List<User> selectUserpasswowrdcheck = UserService.selectUserpasswowrdcheck(user);
+        
+        System.out.println(selectUserpasswowrdcheck);
+        if(selectUserpasswowrdcheck.size()==1)
+        {	
+        	request.getSession().setAttribute("user", user);
+        	 return "main";
+        }
+        else
+        {
+        	 return "login";//返回验证码错误
+        }
+		
+       
+    }
+    
+  
 
 }
