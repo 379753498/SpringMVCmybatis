@@ -38,6 +38,11 @@
 				<mvc:mapping path="/**" /><!--这个地方时你要拦截得路径 我这个意思是拦截所有得URL -->
 				<bean class="com.javen.interceptor.imp.TokenInterceptor" /><!--class文件路径改成你自己写得拦截器路径！！ -->
 			</mvc:interceptor>
+			
+			<mvc:interceptor>
+				<mvc:mapping path="/**" /><!--这个地方时你要拦截得路径 我这个意思是拦截所有得URL -->
+				<bean class="com.javen.interceptor.imp.Mvcinterceptor" /><!--class文件路径改成你自己写得拦截器路径！！ -->
+			</mvc:interceptor>
 		</mvc:interceptors>
 	
 
