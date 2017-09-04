@@ -5,7 +5,6 @@ function getContextPath() {
 	return result;
 }
 
-loginout
 function register() {
 	window.location.href = "register";
 }
