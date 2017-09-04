@@ -19,8 +19,12 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
     private static final Logger LOG = Logger.getLogger(Tokenannotation.class);
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        if (handler instanceof HandlerMethod) {
-        	HttpSession session = request.getSession();
+    	
+    	if (handler instanceof HandlerMethod) {
+    		
+    		response.setHeader("Pragma", "No-cache");
+    		response.setHeader("Cache-Control", "no-cache");
+    		response.setDateHeader("Expires", 0);
         
         	System.out.println("我在拦截"+request.getServletPath());
             HandlerMethod handlerMethod = (HandlerMethod) handler;
