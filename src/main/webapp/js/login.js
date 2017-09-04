@@ -97,7 +97,7 @@ function login() {
 	var kaptcha = $("#kaptcha").val();
 
 	$.ajax({
-		url : getContextPath() + "/login/login",
+		url : getContextPath() + "/login/login"+"?"+new Date(),
 		data : {
 			"username" : username,
 			"kaptcha" : kaptcha,
@@ -107,7 +107,7 @@ function login() {
 		async : true,
 
 		success : function(data) {
-			window.location.href = data;
+			window.location.href = data+"?"+new Date();
 		},
 		error : function(xhr) {
 			console.log(xhr);
