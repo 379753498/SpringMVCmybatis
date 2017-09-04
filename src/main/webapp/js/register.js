@@ -32,6 +32,7 @@ function check() {
 
 	if (isEmail($("#Email").val()) && checkeusername() && passwordcheck()
 			&& checkekaptchacode()) {
+		alert("注册成功，请登录");
 		return true;
 
 	} else {
@@ -41,17 +42,13 @@ function check() {
 
 }
 
-function getkaptchaImage()// 获取验证码图片方法
+function getkaptcha()
 {
-
-	$.ajax({
-		type : "POST",
-		url : getContextPath() + "/login/getmssge.do",
-		success : function(data) {
-			$('#kaptchaImage').attr('src', getContextPath() + data);
-		}
-	});
+	var time = Math.round(Math.random() * 999) + 3000;
+	$('#kaptchaImage').attr('src',
+			getContextPath() + "/myweb/kaptcha.jpg/" + time + ".do");
 }
+
 
 function checkeusername() {
 	var username = $("#username").val();
@@ -115,11 +112,11 @@ function checkekaptchacode() {
 			var sqe = data;
 
 			if (sqe == "error") {
-				$('#smail').html("  验证码输入错误");
+				
 				checkekaptchacode = false;
 			}
 			if (sqe == "success") {
-				$('#smail').html("     验证码正确");
+				
 				checkekaptchacode = true;
 			}
 
@@ -133,7 +130,7 @@ $(document).ready(
 		function() {
 			$('#formuser').attr('action', getContextPath() + '/register.do');// 动态设置注册提交的控制器
 			gettoken();// 请求表单token值 默认页面加载完毕就进行请求
-			getkaptchaImage();// 获取验证码请求
+			getkaptcha();// 获取验证码请求
 			// 用户名合法性监听事件
 			$('#username').bind({
 				focus : function() {
@@ -144,17 +141,10 @@ $(document).ready(
 					checkeusername();
 				}
 			})
-
 			// 验证码点击更换功能模块
 			$('#kaptchaImage').click(
 					function() {
-
-						var time = Math.round(Math.random() * 999) + 3000;
-						$(this).attr(
-								'src',
-								getContextPath() + "/myweb/kaptcha.jpg/" + time
-										+ ".do");
-
+						getkaptcha();
 					});
 			// 验证码输入框绑定事件
 			$('#kaptcha').bind({
@@ -164,8 +154,14 @@ $(document).ready(
 					$('#smail').html("看不清，点击换一张");
 				},
 				blur : function() {
-					checkekaptchacode();
-
+					 var check=checkekaptchacode();//验证验证码是否正确
+					
+					if (check) {
+						$('#smail').html("     验证码正确");
+					}
+					else {
+						$('#smail').html("  验证码输入错误");
+					}
 				}
 			});
 
