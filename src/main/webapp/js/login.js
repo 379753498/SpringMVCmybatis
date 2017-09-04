@@ -5,34 +5,44 @@ function getContextPath() {
 	return result;
 }
 
-
+loginout
 function register() {
 	window.location.href = "register";
 }
 function checkekaptchacode() {
 	var kaptcha = $('#kaptcha').val();
-
+	var checkekaptchacode;
 	$.ajax({
 		type : "POST",
 		url : getContextPath() + "/login/check.do",
 		data : {
 			"kaptcha" : kaptcha
 		},
+		async : false,
 		success : function(data) {
 
 			var sqe = data;
 
 			if (sqe == "error") {
-				$('#smail').html("  验证码输入错误");
-				return false;
+				
+				checkekaptchacode = false;
 			}
 			if (sqe == "success") {
-				$('#smail').html("     验证码正确");
-				return true;
+				
+				checkekaptchacode = true;
 			}
 
 		}
 	});
+	return checkekaptchacode;
+
+}
+
+function getkaptcha()
+{
+	var time = Math.round(Math.random() * 999) + 3000;
+	$('#kaptchaImage').attr('src',
+			getContextPath() + "/myweb/kaptcha.jpg/" + time + ".do");
 }
 
 
@@ -52,23 +62,11 @@ $(document).ready(
 				})
 			});
 
-			$.ajax({
-				type : "POST",
-				url : getContextPath() + "/login/getmssge.do",
-				success : function(data) {
-					$('#kaptchaImage').attr('src', getContextPath() + data);
-				}
-			});
+			getkaptcha();//获取验证码
 
 			$('#kaptchaImage').click(
 					function() {
-
-						var time = Math.round(Math.random() * 999) + 3000;
-						$(this).attr(
-								'src',
-								getContextPath() + "/myweb/kaptcha.jpg/" + time
-										+ ".do");
-
+						getkaptcha();//获取验证码
 					});
 
 			$('#kaptcha').bind({
@@ -78,7 +76,16 @@ $(document).ready(
 					$('#smail').html("看不清，点击换一张");
 				},
 				blur : function() {
-					checkekaptchacode()
+
+					 var check=checkekaptchacode();//验证验证码是否正确
+					
+					if (check) {
+						$('#smail').html("     验证码正确");
+					}
+					else {
+						$('#smail').html("  验证码输入错误");
+					}
+				
 				}
 			});
 
@@ -91,25 +98,25 @@ function login() {
 	var kaptcha = $("#kaptcha").val();
 
 	$.ajax({
-		url : getContextPath() + "/login/check.do",
+		url : getContextPath() + "/login/login",
 		data : {
 			"username" : username,
 			"kaptcha" : kaptcha,
-			"username" : username
+			"password" : password
 		},
 		type : "post",
 		async : true,
 
 		success : function(data) {
-
+			alert(data);
+			window.location.href = data;
 		},
 		error : function(xhr) {
 			console.log(xhr);
 			alert(xhr)
+			getkaptcha();
 		}
 	});
 
-	var time = Math.round(Math.random() * 999) + 3000;
-	$('#kaptchaImage').attr('src',
-			getContextPath() + "/myweb/kaptcha.jpg/" + time + ".do");
+	
 }
