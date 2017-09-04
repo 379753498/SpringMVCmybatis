@@ -1,6 +1,7 @@
 package com.javen.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -102,12 +103,17 @@ public class PageController {
 	public String remosession( HttpServletRequest request) {
 		
 		
-		try {request.removeAttribute("uesr");
-		return "success";
+		try {
+			HttpSession session = request.getSession();
+			session.invalidate();
+			return "success";
+		
+		
 		} catch (Exception e) {
 			// TODO: handle exception
+			return "error";
 		}
-		return "error";
+		
 
 	}
 
