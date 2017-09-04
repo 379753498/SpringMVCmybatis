@@ -35,7 +35,7 @@ public class Mvcinterceptor extends HandlerInterceptorAdapter {
 		
 		 if(Sessionannotation!=null)
 		 {
-			 isok= lsok(request);
+			 isok= lsok(request,response);
 		
 			 
 		 }
@@ -45,15 +45,16 @@ public class Mvcinterceptor extends HandlerInterceptorAdapter {
 
 	}
 
-	private boolean lsok(HttpServletRequest request) {
+	private boolean lsok(HttpServletRequest request, HttpServletResponse Response ) {
 		try {
-			if (request.getServletPath() != ":/login") {
+			System.out.println(request.getServletPath());
+			if (!(request.getServletPath().contains("/login")) ) {
 				System.out.println(request.getServletPath()
 						+ "-----111111111111111");
 				User attribute = (User) request.getSession().getAttribute("user");
 				if (attribute == null) {
 					LOG.warn("NO  session User,url:" + request.getServletPath());
-
+					Response.sendRedirect(request.getContextPath()+"/login");
 					return false;
 				}
 			}
