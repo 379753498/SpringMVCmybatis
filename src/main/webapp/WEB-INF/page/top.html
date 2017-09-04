@@ -6,13 +6,37 @@
 <link href="css/style.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" src="js/jquery.js"></script>
 <script type="text/javascript">
+
+function getContextPath() {
+	var pathName = document.location.pathname;
+	var index = pathName.substr(1).indexOf("/");
+	var result = pathName.substr(0, index + 1);
+	return result;
+}
 $(function(){	
 	//顶部导航切换
 	$(".nav li a").click(function(){
 		$(".nav li a.selected").removeClass("selected")
 		$(this).addClass("selected");
 	})	
+	
+	$('#loginout').click(function(){
+	
+		$.ajax({
+			type : "POST",
+			url : getContextPath() + "/remosession",
+			data : {},
+			success : function(data) {
+				if(data!="success")
+					
+					{alert("退出session失败");}
+			}
+
+		});
+	
+})
 })	
+
 </script>
 
 
@@ -30,7 +54,7 @@ $(function(){
     <ul>
     <li><span><img src="images/help.png" title="帮助"  class="helpimg"/></span><a href="#">帮助</a></li>
     <li><a href="#">关于</a></li>
-    <li><a href="login.html" target="_parent">退出</a></li>
+    <li><a href="login" target="_parent" id="loginout">退出</a></li>
     </ul>
      
   
