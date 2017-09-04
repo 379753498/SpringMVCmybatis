@@ -72,7 +72,7 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public List<User> selectUserpasswowrdcheck(User user) {
 		// TODO Auto-generated method stub  
-		return IUserDaoto.selectUserpasswowrdcheck(user);
+		return IUserDaoto.selectUserpasswowrdcheck(user.getUsername(),user.getPassword());
 	}  
   
 }  

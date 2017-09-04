@@ -78,6 +78,9 @@ public class User implements Serializable {
 	private String EmailUUid;
 	
 
+
+
+
 	public String getPassword() {
 		return password;
 	}
