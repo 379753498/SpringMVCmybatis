@@ -1,28 +1,15 @@
 package com.javen.Redis;  
   
 import java.io.Serializable;
-import java.util.List;  
-import java.util.Map;  
 import java.util.Set;  
 import java.util.concurrent.TimeUnit;
-
-import javax.annotation.Resource;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.connection.RedisConnection;
-import org.springframework.data.redis.connection.RedisConnectionFactory;
-import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
-import org.springframework.data.redis.core.HashOperations;
-import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.SetOperations;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Component;
 
-import com.javen.model.User;
 
-import redis.clients.jedis.JedisPoolConfig;
   
 /** 
  * Created by tl on 17/2/16. 
