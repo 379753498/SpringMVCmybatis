@@ -49,8 +49,7 @@ public class Mvcinterceptor extends HandlerInterceptorAdapter {
 		try {
 			System.out.println(request.getServletPath());
 			if (!(request.getServletPath().contains("/login")) ) {
-				System.out.println(request.getServletPath()
-						+ "-----111111111111111");
+					
 				User attribute = (User) request.getSession().getAttribute("user");
 				if (attribute == null) {
 					LOG.warn("NO  session User,url:" + request.getServletPath());

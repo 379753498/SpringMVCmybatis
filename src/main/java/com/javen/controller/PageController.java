@@ -98,6 +98,13 @@ public class PageController {
 
 	}
 	
+	
+	@RequestMapping("/customer")
+	@Sessionannotation(CheckSeesion =true)
+	public String customer() {
+		return "customer";
+
+	}
 	@RequestMapping("/remosession")
 	@ResponseBody
 	public String remosession( HttpServletRequest request) {

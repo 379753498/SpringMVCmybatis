@@ -17,10 +17,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class RedisUtil {  
   
-	RedisUtil()
-	{
-		System.out.println("aa");
-	}
+
 	private Logger logger = Logger.getLogger(RedisUtil.class); 
 	
 

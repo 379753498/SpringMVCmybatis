@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.javen.Redis.RedisUtil;
 import com.javen.interceptor.annotation.Tokenannotation;
 import com.javen.mail.MailUtil;
 import com.javen.model.User;
@@ -32,23 +33,24 @@ import com.javen.service.IUserService;
 @Controller
 @RequestMapping("/")
 public class UserRegisterController {
-	private static Logger log = LoggerFactory.getLogger(UserRegisterController.class);
+	private static Logger log = LoggerFactory
+			.getLogger(UserRegisterController.class);
 
 	@Resource
 	private IUserService UserServiceImpl;
 
 	@Resource
 	private MailUtil mail;
+	@Resource
+	private RedisUtil redisUtil;
 
 	/**
 	 * 
-	 * 点击注册按钮请求控制器方法；
-	 * 对注册信息进行校验后返回登录页面
-	 * 如果失败返回注册页面
+	 * 点击注册按钮请求控制器方法； 对注册信息进行校验后返回登录页面 如果失败返回注册页面
 	 *
 	 * @param request
 	 * @param user
-	 * @return  
+	 * @return
 	 * @Description:
 	 */
 	@RequestMapping("/register.do")
@@ -58,14 +60,15 @@ public class UserRegisterController {
 		user.setState(1);
 		user.setEmailUUid(getRandomString(15));
 		int insetuser = UserServiceImpl.Insetuser(user);
+
 		System.out.println(user);
 		String basePath = request.getScheme() + "://" + request.getServerName()
 				+ ":" + request.getServerPort() + getContextPath + "/"
 				+ user.getEmailUUid();
-		// mail.send(user.getEmail(), "淘宝网激活邮件", user.getUsername()+"您好 恭喜您注册成功 请点击下面的链接激活您的账户"+basePath+"/register.do");
-		
-		if (insetuser==1)
-		{
+		// mail.send(user.getEmail(), "淘宝网激活邮件",
+		// user.getUsername()+"您好 恭喜您注册成功 请点击下面的链接激活您的账户"+basePath+"/register.do");
+		redisUtil.set(user.getUsername(), user);
+		if (insetuser == 1) {
 			return "login";
 		}
 		return "register";
@@ -90,19 +93,52 @@ public class UserRegisterController {
 		return attribute.toString();
 	}
 
+	// redis缓存实例 如果没有这个用户就
 	@RequestMapping("/checkUser.do")
 	@ResponseBody
 	public String checkUser(User user) {
 
-		System.out.println(user.getUsername());
-		List<User> selectByname = UserServiceImpl.selectByname(user);
-		System.out.println(selectByname.size());
-		if (selectByname.size() > 0) {
-			System.out.println(selectByname.get(0));
+		if (user.getUsername() == null) {
 			return "error";
-		} else {
-			return "success";
 		}
+		User redisuser = null;
+		
+		try {
+			redisuser = (User) redisUtil.get(user.getUsername());
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		if (redisuser != null && redisuser.getUsername() != null) {
+
+			if (redisuser.getUsername().equals(user.getUsername())) {
+				return "error";
+			}
+
+			else {
+
+				return "success";
+			}
+
+		} 
+		else
+		{
+			List<User> selectByname = UserServiceImpl.selectByname(user);
+			
+
+			
+			if (selectByname.size() == 1) {
+				redisuser = selectByname.get(0);
+				redisUtil.set(user.getUsername(), redisuser);
+				return "error";
+
+			} else {
+				return "success";
+			}
+
+		}
+		
 
 	}
 
