@@ -78,9 +78,9 @@ public class CaptchaImageCreateController {
 	        response.setHeader("Cache-Control", "no-cache");  
 	        response.setDateHeader("Expires", 0);  
 	        response.setContentType("image/gif");  
-	        Captcha captcha = new GifCaptcha(146,33,6);
+	        Captcha captcha = new GifCaptcha(146,33,4);//创建了一个146长度 宽度33 长度为4个的验证码；对象
 	        
-	        captcha.out(response.getOutputStream());
+	        captcha.out(response.getOutputStream());//将生成的验证码显示在前台；
 	        HttpSession session = request.getSession(true);  
 	        //存入Session
 	        session.setAttribute(Constants.KAPTCHA_SESSION_KEY,captcha.text().toLowerCase());  
