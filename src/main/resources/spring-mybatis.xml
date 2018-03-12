@@ -146,7 +146,7 @@
 	</bean>
 
 <bean id="mial" class="com.sun.mail.util.MailSSLSocketFactory">
-<property name="TrustAllHosts" value="true" />
+<property name="trustAllHosts"  value="true" />
 
 </bean>
 	<!-- 邮件发送器 -->
