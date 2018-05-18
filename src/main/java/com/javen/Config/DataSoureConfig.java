@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.sql.DataSource;
 import org.mybatis.spring.SqlSessionFactoryBean;
-import org.mybatis.spring.mapper.MapperScannerConfigurer;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowire;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,6 +18,7 @@ import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.filter.logging.Slf4jLogFilter;
 
 @Configuration
+@MapperScan(basePackages="com.javen.dao")
 public class DataSoureConfig {
 
 	@Autowired
@@ -64,14 +65,7 @@ public class DataSoureConfig {
 
 	}
 
-	@Bean
-	public MapperScannerConfigurer getMapperScannerConfigurer()
 
-	{MapperScannerConfigurer MapperScannerConfigurer =new  MapperScannerConfigurer();
-		MapperScannerConfigurer.setBasePackage("com.javen.dao");
-		MapperScannerConfigurer.setSqlSessionFactoryBeanName("SqlSessionFactoryBean");
-		return MapperScannerConfigurer;
-	}
 	@Bean
 	public  DataSourceTransactionManager getDataSourceTransactionManager() throws PropertyVetoException, SQLException
 	{

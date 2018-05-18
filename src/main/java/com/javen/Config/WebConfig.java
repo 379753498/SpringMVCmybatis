@@ -13,10 +13,12 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import com.javen.interceptor.imp.Mvcinterceptor;
 import com.javen.interceptor.imp.TokenInterceptor;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 
 @Configuration
 @EnableWebMvc
+@EnableSwagger2
 @ComponentScan( "com.javen.controller" )
 public class WebConfig  extends WebMvcConfigurerAdapter{
 
