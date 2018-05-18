@@ -1,16 +1,7 @@
 # SSM Demo
 
  SSM框架——详细整合教程（Spring+SpringMVC+MyBatis）
- 数据库建表操作
- 运用技术
- html
- ajax
- java 
- maven
- mail
- jquery
- token
- bootstrap
+
  
  CREATE TABLE `userinfo` (
   `id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
@@ -23,3 +14,8 @@
   `state` INT(11) DEFAULT NULL COMMENT '状态',
   PRIMARY KEY (`id`)
 ) ENGINE=INNODB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8
+
+
+经过修改成javaConfig形式去web.XML 运行正常；
+集成了 Redis Swagger2 JavaMail 
+详细请看Config目录代码；
