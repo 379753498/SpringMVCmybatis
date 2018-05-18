@@ -36,7 +36,6 @@ import com.javen.Captcha.GifCaptcha;
 public class CaptchaImageCreateController {
 	
 		@Autowired
-		@Qualifier("captchaProducer")
 		 private Producer captchaProducer ;
 		
 //    @RequestMapping("/kaptcha.jpg/{id}.do")//此处使用动态参数解决验证码不更新问题IE
