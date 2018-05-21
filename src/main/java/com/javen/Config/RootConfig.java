@@ -3,27 +3,19 @@ package com.javen.Config;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-
-import com.alibaba.druid.filter.logging.Slf4jLogFilter;
-
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
-
-import springfox.documentation.spring.web.PropertySourcedMapping;
-
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import com.google.code.kaptcha.util.Config;
 
 @Configuration
-@ComponentScan(basePackages="com.javen.*")
-
+@ComponentScan(basePackages = "com.javen.*")
 public class RootConfig {
-	
+
 	@Bean
 	public static PropertyPlaceholderConfigurer properties() {
 		final PropertyPlaceholderConfigurer ppc = new PropertyPlaceholderConfigurer();
@@ -34,11 +26,11 @@ public class RootConfig {
 		return ppc;
 
 	}
+
 	@Bean
-	public DefaultKaptcha getDefaultKaptcha()
-	{
+	public DefaultKaptcha getDefaultKaptcha() {
 		DefaultKaptcha DefaultKaptcha = new DefaultKaptcha();
-		Properties Properties =new Properties();
+		Properties Properties = new Properties();
 		Properties.put("kaptcha.border", "yes");
 		Properties.put("kaptcha.border.color", "105,179,90");
 		Properties.put("kaptcha.textproducer.font.color", "blue");
@@ -47,14 +39,10 @@ public class RootConfig {
 		Properties.put("kaptcha.image.height", "50");
 		Properties.put("kaptcha.textproducer.char.length", "4");
 		Properties.put("kaptcha.textproducer.font.names", "宋体,楷体,微软雅黑");
-		Config Config= new Config(Properties);
+		Config Config = new Config(Properties);
 		DefaultKaptcha.setConfig(Config);
 		return DefaultKaptcha;
-		
-		
+
 	}
-
-
-
 
 }

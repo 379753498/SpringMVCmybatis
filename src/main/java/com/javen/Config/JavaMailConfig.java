@@ -2,9 +2,7 @@ package com.javen.Config;
 
 import java.security.GeneralSecurityException;
 import java.util.Properties;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -18,16 +16,15 @@ import com.sun.mail.util.MailSSLSocketFactory;
 @PropertySource("classpath:mail.properties")
 public class JavaMailConfig {
 
-	 @Autowired
-     Environment env;
-	
-
+	@Autowired
+	Environment env;
 
 	@Bean
 	public JavaMailSenderImpl getJavaMailSenderImpl() {
 		JavaMailSenderImpl JavaMailSenderImpl = new JavaMailSenderImpl();
 		JavaMailSenderImpl.setHost(env.getProperty("mail.host"));
-		JavaMailSenderImpl.setPort(Integer.parseInt(env.getProperty("mail.port")));
+		JavaMailSenderImpl.setPort(Integer.parseInt(env
+				.getProperty("mail.port")));
 		JavaMailSenderImpl.setUsername(env.getProperty("mail.password"));
 		JavaMailSenderImpl.setPassword(env.getProperty("mail.username"));
 		Properties p = new Properties();

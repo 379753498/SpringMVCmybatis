@@ -4,32 +4,24 @@ import java.beans.PropertyVetoException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.sql.DataSource;
-
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowire;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-
 import com.alibaba.druid.filter.Filter;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.filter.logging.Slf4jLogFilter;
 
 @Configuration
 @PropertySource("classpath:jdbc.properties")
-@MapperScan(basePackages="com.javen.dao")
-
+@MapperScan(basePackages = "com.javen.dao")
 public class DataSoureConfig {
-
-
 
 	@Bean
 	public Slf4jLogFilter getSlf4jLogFilter() {
@@ -40,8 +32,9 @@ public class DataSoureConfig {
 		slf.setStatementExecutableSqlLogEnable(true);
 		return slf;
 	}
-    @Autowired
-    Environment env;
+
+	@Autowired
+	Environment env;
 
 	@Bean(name = "DataSourcemysql", autowire = Autowire.BY_NAME)
 	public DataSource DataSourcemysql() throws PropertyVetoException,
@@ -74,18 +67,14 @@ public class DataSoureConfig {
 
 	}
 
-
 	@Bean
-	public  DataSourceTransactionManager getDataSourceTransactionManager() throws PropertyVetoException, SQLException
-	{
-		
-		DataSourceTransactionManager DataSourceTransactionManager =new DataSourceTransactionManager();
+	public DataSourceTransactionManager getDataSourceTransactionManager()
+			throws PropertyVetoException, SQLException {
+
+		DataSourceTransactionManager DataSourceTransactionManager = new DataSourceTransactionManager();
 		DataSourceTransactionManager.setDataSource(DataSourcemysql());
 		return DataSourceTransactionManager;
-		
-	}
 
-	
-	
+	}
 
 }
