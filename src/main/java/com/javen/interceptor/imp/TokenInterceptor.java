@@ -26,7 +26,7 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
     		response.setHeader("Cache-Control", "no-cache");
     		response.setDateHeader("Expires", 0);
         
-        	System.out.println("我在拦截"+request.getServletPath());
+        	System.out.println("我在拦截"+request.getRequestURL());
             HandlerMethod handlerMethod = (HandlerMethod) handler;
             Method method = handlerMethod.getMethod();
             Tokenannotation annotation = method.getAnnotation(Tokenannotation.class);
