@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.alibaba.druid.filter.logging.Slf4jLogFilter;
+
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -12,6 +13,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+
+import springfox.documentation.spring.web.PropertySourcedMapping;
 
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import com.google.code.kaptcha.util.Config;
@@ -26,12 +29,8 @@ public class RootConfig {
 		final PropertyPlaceholderConfigurer ppc = new PropertyPlaceholderConfigurer();
 		ppc.setIgnoreResourceNotFound(true);
 		final List<Resource> resourceLst = new ArrayList<Resource>();
-		resourceLst.add(new ClassPathResource("jdbc.properties"));
-		resourceLst.add(new ClassPathResource("mail.properties"));
 		resourceLst.add(new ClassPathResource("redis.properties"));
 		ppc.setLocations(resourceLst.toArray(new Resource[] {}));
-
-		System.out.println("aaaa");
 		return ppc;
 
 	}
@@ -55,15 +54,7 @@ public class RootConfig {
 		
 	}
 
-	@Bean
-	public Slf4jLogFilter getSlf4jLogFilter() {
-		Slf4jLogFilter slf = new Slf4jLogFilter();
-		slf.setConnectionLogEnabled(true);
-		slf.setStatementLogEnabled(true);
-		slf.setResultSetLogEnabled(true);
-		slf.setStatementExecutableSqlLogEnable(true);
-		return slf;
-	}
+
 
 
 }

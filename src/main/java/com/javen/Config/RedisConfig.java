@@ -2,16 +2,21 @@ package com.javen.Config;
 
 import java.io.Serializable;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import redis.clients.jedis.JedisPoolConfig;
+
 @Configuration
+@PropertySource("classpath:redis.properties")
 public class RedisConfig {
 
 	@Value("${redis.maxActive}")
@@ -22,6 +27,9 @@ public class RedisConfig {
 	int maxWaitMillis;
 	@Value("${redis.testOnBorrow}")
 	boolean testOnBorrow;
+
+	@Autowired
+	Environment RedisProperties;
 
 	@Bean
 	public JedisPoolConfig getJedisPoolConfig() {
