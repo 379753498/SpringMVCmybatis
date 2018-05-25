@@ -1,9 +1,13 @@
 package com.javen.testmybatis;  
 
 
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.WebApplicationContext;
 
 import com.javen.Redis.RedisUtil;
+import com.javen.junit.MvcJunitRunApplication;
 
 
 /**
@@ -17,20 +21,14 @@ import com.javen.Redis.RedisUtil;
  *@Version:1.1.0
  */
   
-public class RedisTest {
-
-	
-	public static void main(String[] args) {
-		ApplicationContext applicationContextlzy = null ;
-		try {
-			 applicationContextlzy = ApplicationContextUitl.getApplicationContextlzy();
-
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		
+public class RedisTest extends MvcJunitRunApplication {
+	@Autowired
+	WebApplicationContext applicationContextlzy;
+	@Test
+	public void testone()
+	{
 		RedisUtil bean = applicationContextlzy.getBean(RedisUtil.class);
-		bean.set("xujian", "程刚....redis");
+		bean.set("xujian", "WebApplicationContext");
 		Object object = bean.get("xujian");
 		System.out.println(object.toString());
 	}
