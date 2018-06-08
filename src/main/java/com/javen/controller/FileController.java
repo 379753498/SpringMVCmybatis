@@ -16,7 +16,7 @@ import java.io.IOException;
 public class FileController {
 
     @RequestMapping(value = "fileUpload", method = RequestMethod.GET)
-    public String toFileUpload(){
+    public String toFileUpload() {
         return "/file/fileUpload";
     }
 
@@ -27,18 +27,27 @@ public class FileController {
      * @return
      */
     @RequestMapping(value = "upload", method = RequestMethod.POST)
-    public String fileUpload(@RequestParam("file") MultipartFile file){
-        if (!file.isEmpty()){
+    public String fileUpload (@RequestParam("file") MultipartFile file)throws IOException {
+
+        if (!file.isEmpty()) {
+
             {
                 //存入F:\temp目录下
-//                FileUtils.copyInputStreamToFile(file.getInputStream(), new File("F:\\temp",
-//                        System.currentTimeMillis()+ file.getOriginalFilename()));
+                FileUtils.copyInputStreamToFile(file.getInputStream(), new File("/Users/HelloWord/Downloads/temp",
+                        System.currentTimeMillis() + file.getOriginalFilename()));
 
-                System.out.println(file.getSize());
+                System.out.println(file.getOriginalFilename());
+                return toFileUpload();
             }
+
+        }
+        else
+        {
+
+            return "login";
         }
         //上传成功，跳转至success页面
-        return "login";
+
     }
 }
 
