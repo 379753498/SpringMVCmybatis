@@ -275,6 +275,21 @@
 
 			</plugin>
 
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.17</version>
+				<configuration>
+					<includes>
+						<include>**/TestMe.java</include>
+						<include>**/TestYou.java</include>
+					</includes>
+					<excludes>
+						<exclude>**/TestOne.java</exclude>
+						<exclude>**/TestTwo.java</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
 		</plugins>
 
 	</build>
