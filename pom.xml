@@ -278,18 +278,23 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.17</version>
+				<version>2.20.1</version>
 				<configuration>
-					<includes>
-						<include>**/TestMe.java</include>
-						<include>**/TestYou.java</include>
-					</includes>
 					<excludes>
-						<exclude>**/TestOne.java</exclude>
-						<exclude>**/TestTwo.java</exclude>
+						<exclude>**</exclude>
 					</excludes>
 				</configuration>
 			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.0.0</version>
+				<configuration>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+
 		</plugins>
 
 	</build>
