@@ -1,4 +1,4 @@
-
+#!/bin/bash
 cd /home
 docker build -t tomcat:spring .
 rm -rf /home/SpringMVCmybatis.war
