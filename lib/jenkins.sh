@@ -1,6 +1,8 @@
 
 cd /home
 docker build -t tomcat:spring .
+rm -rf /home/SpringMVCmybatis.war
+rm -rf /home/Dockerfile
 docker kill spring
 docker rm spring
 docker ps
