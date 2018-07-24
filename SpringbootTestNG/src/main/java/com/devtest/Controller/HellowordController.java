@@ -9,9 +9,19 @@ import org.springframework.web.bind.annotation.RestController;
 public class HellowordController {
     @GetMapping
     @RequestMapping("/print")
-    public String  PrintHelloController(String  Print)
+    public String  PrintHelloController()
+    {
+        String Print="helloworld";
+        System.out.println(Print);
+        return Print;
+    }
+
+    @GetMapping
+    @RequestMapping("/print2")
+    public String  PrintHelloController(String Print)
     {
         System.out.println(Print);
         return Print;
     }
+
 }
