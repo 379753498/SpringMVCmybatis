@@ -4,11 +4,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.javen.interceptor.annotation.Sessionannotation;
 import com.javen.model.User;
+
+import java.util.Map;
 
 @RequestMapping("/")
 @Controller
@@ -32,7 +35,10 @@ public class PageController {
 
 	// 注册首页
 	@RequestMapping("/register")
-	public String register() {
+	public String register(Model model) {
+		model.addAttribute("hello","Hello Spring Boot");
+//		map.put("hello","Hello Spring Boot");
+
 		return "register";
 
 	}

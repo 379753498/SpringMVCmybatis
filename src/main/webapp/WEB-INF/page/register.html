@@ -1,5 +1,7 @@
 ﻿<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -12,6 +14,8 @@
 	</head>
 
 	<body	style="background-color: #1c77ac; background-image: url(images/light.png); background-repeat: no-repeat; background-position: center top; overflow: hidden;">
+	<h1>Hello World!</h1>
+	<p th:text="${hello}">Name</p>
 
 		<center>
 				
@@ -29,7 +33,7 @@
 						</blockquote>
 					</td>
 					<td>
-						<input type="text" id="username" name="username" placeholder="用户名"/>
+						<input type="text" id="username" name="username" th:placeholder="${hello}"/>
 					</td>
 				</tr>
 				<tr class="success">
